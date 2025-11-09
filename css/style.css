@@ -97,3 +97,39 @@ footer {
         border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
+/* --- DARK MODE STYLES (Added for Interactive Feature) --- */
+
+.dark-mode {
+    /* Define colors for dark mode */
+    --primary-color: #80deea; /* Lighter cyan for contrast */
+    --secondary-color: #bbbbbb; 
+    --background-color: #1c1c1c; 
+    --text-color: #f0f0f0;
+    --nav-bg: #2a2a2a; 
+
+    /* Apply colors */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.dark-mode header {
+    background-color: var(--nav-bg);
+}
+
+.dark-mode footer {
+    background-color: var(--nav-bg);
+    color: var(--secondary-color);
+}
+
+/* Style the button */
+#theme-toggle {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
