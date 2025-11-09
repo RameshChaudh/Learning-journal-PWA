@@ -1,41 +1,99 @@
-/* BASE MOBILE STYLES (Default styles for all screens) */
+/* ==================================== */
+/* 📱 MOBILE-FIRST BASE STYLES (< 768px) */
+/* ==================================== */
 
-/* Set a readable font and basic spacing */
-body {
-    font-family: system-ui, sans-serif;
-    margin: 0;
-    padding: 1rem;
-    line-height: 1.6;
-    background-color: #f4f4f4; [span_1](start_span)/* Basic colours[span_1](end_span) */
+:root {
+    /* Updated Primary Color: Teal/Cyan (Slightly greenish blue) */
+    --primary-color: #00bcd4; /* A vibrant Cyan for headings and highlights */
+    --secondary-color: #607d8b; /* Darker gray for accents/footer text */
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+    --nav-bg: #455a64; /* A dark slate/blue-gray for the header */
 }
 
-/* Navigation Styling (Stacking links for mobile) */
+/* Base and Fonts */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Headings and Spacing */
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+}
+
+/* Navigation Layout (Mobile: Stacked/Column) */
+header {
+    background-color: var(--nav-bg);
+    padding: 0;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
-    [span_2](start_span)/* Use Flexbox for layout[span_2](end_span) */
+    /* Use Flexbox for layout */
     display: flex; 
-    flex-direction: column; 
-    align-items: center;
-    background-color: #333;
+    flex-direction: column; /* Stacked links for mobile */
+    align-items: stretch; /* Stretch links to fill width */
+    margin: 0;
 }
 
 nav li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 10px 15px;
+    padding: 15px 15px;
     text-decoration: none;
-    width: 100%; /* Full width for better mobile targets */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-[span_3](start_span)/* Highlight key visual elements like active page[span_3](end_span) */
+/* Highlight key visual elements: Active page and hover state */
 nav li a:hover,
-nav li a.active { /* You'd add the 'active' class to the current page link */
-    background-color: #007bff;
+nav li a.active { 
+    background-color: var(--primary-color); /* Highlight now uses the greenish blue */
+    color: white;
 }
 
-/* Example of Main Layout Styling */
+/* Main Content Area */
 main {
-    padding: 1rem 0;
+    padding: 1rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #e9ecef;
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    margin-top: 2rem;
+}
+
+/* ==================================== */
+/* 💻 MEDIA QUERY FOR TABLET/DESKTOP (> 768px) */
+/* ==================================== */
+
+@media screen and (min-width: 768px) {
+    
+    /* Center the main content area */
+    main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Navigation Layout (Desktop: Row) */
+    nav ul {
+        flex-direction: row; /* Horizontal links for desktop */
+        justify-content: center;
+    }
+
+    nav li a {
+        border-bottom: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
 }
