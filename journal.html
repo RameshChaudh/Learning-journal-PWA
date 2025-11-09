@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Journal PWA - Weekly Entries</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="journal.html" class="active">Journal</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="journal-page">
+        <h1>Weekly Learning Journal</h1>
+        <p>This section contains reflections and insights from each week of the module, serving as the required learning log.</p>
+        
+        <article class="journal-entry">
+            <h2>Week 2: Frontend Fundamentals (Lab 2)</h2>
+            <p>Goal: Established the basic structure, layout, and navigation of the Learning Journal PWA using only HTML and CSS, with a focus on responsive, mobile-first design.</p>
+            
+            <h3>Journal Questions:</h3>
+            <ol>
+                <li>How did you approach mobile-first design?<br>
+                    I adopted a mobile-first strategy by ensuring the CSS was written primarily for small screen sizes (phones) by default. I first styled the main elements, such as the body, fonts, and colours. Critically, I used Flexbox on the navigation (nav ul) to stack the links vertically (flex-direction: column), making them large touch targets suitable for mobile. Only after the mobile layout was complete did I use a CSS media query (@media screen and (min-width: 768px)) to override those styles, changing the navigation to a horizontal row and centering the content for tablet and desktop views.
+                </li>
+                <li>What was the most useful HTML or CSS concept you applied this week?<br>
+                    The most useful concept was Flexbox. It was essential for creating a responsive navigation bar. By switching the flex-direction property based on screen size, I maintained layout consistency and adapted the design effectively between mobile and desktop. This satisfied the requirement to build the skeleton structure and design layout using HTML and CSS only.
+                </li>
+                <li>What part of HTML or CSS did you find most challenging or confusing?<br>
+                    The most challenging part was ensuring the "active" page highlighting worked correctly across all four HTML pages (index.html, journal.html, etc.). Since JavaScript was excluded for this week's task, I had to manually place the class="active" tag on the current page's link in each of the four separate HTML files. This repeated manual effort was tedious and highlighted the need for a templating system or JavaScript component loading for navigation reusability in future weeks.
+                </li>
+            </ol>
+        </article>
+
+        <article class="journal-entry">
+            <h2>Week 1: Introduction and PWA (Lab 1)</h2>
+            <p>Goal: Become familiar with running applications across multiple platforms (GitHub, VS Code, PythonAnywhere, Android Studio) by building the Temperature Converter PWA.</p>
+            
+            <h3>Lab 1 Reflection and Challenges:</h3>
+            <ul>
+                <li>Steps Followed & Technologies: Describe the steps using GitHub, VS Code, PythonAnywhere, Android Studio, PWA, and Kotlin code.
+                    <p>The lab began with GitHub setup, creating the Temperature ConverterPWA repository and integrating with VS Code by installing Git and the GitHub extensions. I used VS Code to open the repository remotely, create the initial index.html and commit the changes. Next, I deployed the site using GitHub Pages after changing the repository visibility to public. The PWA was built by adding the **manifest.json** for installability, the main UI (HTML form, converter.css for styling, and converter.js for conversion logic). Finally, a Service Worker (sw.js) was added to enable offline functionality. I also tested deploying the same files to PythonAnywhere and followed instructions to run a Kotlin-based Temperature Converter app in Android Studio.</p>
+                </li>
+                <li>Challenges Faced: Describe any difficulties you encountered while running the code or configuring the platforms.
+                    <p>One challenge was ensuring the correct relative paths were used for the PWA manifest and Service Worker references (e.g., /manifest.json and /sw.js). Incorrect paths prevented the app from being installed or working offline. Another area of complexity was setting up Android Studio and running the Kotlin app, as it required downloading and configuring SDKs and emulators, which was significantly more complex than the web deployments (GitHub Pages and PythonAnywhere).</p>
+                </li>
+            </ul>
+        </article>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ramesh Chaudhary. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
