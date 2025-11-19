@@ -28,13 +28,42 @@
             </form>
         </section>
 
+        <!-- NEW: Data Management Section -->
+<section class="export-section">
+    <h3> Export All Entries</h3>
+    <p>Download all your journal entries (browser + Python) as a JSON file</p>
+    <button id="export-btn" class="export-button">Export All Entries</button>
+</section>
+
         <section id="saved-entries-container">
+            <!-- Custom entries will be loaded here dynamically -->
         </section>
         
         <article class="journal-entry">
-            <h2>Week 4: Introduction to API (Lab 4)</h2>
-            <p>Goal: Extended the Learning Journal PWA by integrating three different types of APIs (Storage, Browser, and Third-Party) to enhance persistence and interactivity.</p>
+            <h2>Week 5: Python & JSON Backend Data (Lab 5)</h2>
+            <p>Goal: Extend the Learning Journal PWA by introducing Python and JSON as tools for storing reflections in a file-based backend system.</p>
             
+            <h3>Journal Questions:</h3>
+            <ol>
+                <li><strong>How is storing data in a JSON file different from using browser storage?</strong><br>
+                    I implemented a dual-storage system where browser storage (localStorage) handles immediate saves from the web interface, while JSON files serve as a Python-editable backend. Browser storage is device-specific and persists only in that browser, while JSON files are server-side files that can be edited externally and act as a universal backup. The system automatically merges both sources and removes duplicates when displaying entries.
+                </li>
+                <li><strong>How did you use Python to create or update your JSON file?</strong><br>
+                    I created a Python script (`save_entry.py`) that uses the built-in `json` module to read and write JSON files. The script prompts the user for entry title and content, creates an entry object matching the JavaScript structure (with id, title, content, date, time, and source fields), loads existing entries from the JSON file, appends the new entry, and saves the updated array back to the file using `json.dump()` with proper formatting.
+                </li>
+                <li><strong>What does your PWA show locally, and what will users see on GitHub? Are they the same? Why or why not?</strong><br>
+                    Locally, users see a combined view of all entries from both browser storage and the JSON file. On GitHub Pages, users only see the pre-committed JSON file entries. They are not the same because localStorage is device-specific and doesn't transfer to GitHub's servers, and the Python script cannot execute on static hosting. This demonstrates the difference between client-side and server-side data persistence.
+                </li>
+                <li><strong>What extra feature did you add to your PWA using the JSON file, and why?</strong><br>
+                    I implemented an Export/Import system that allows users to download all their entries (from both storage sources) as a JSON file and import entries from external JSON files. This provides complete data portability, backup capabilities, and gives users full control over their learning journal data, aligning with the reflective purpose of the application.
+                </li>
+            </ol>
+        </article>
+
+        <article class="journal-entry">
+            <h2>Week 4: Introduction to API (Lab 4)</h2>
+            <p id="entry-content-w4">Goal: Extended the Learning Journal PWA by integrating three different types of APIs (Storage, Browser, and Third-Party) to enhance persistence and interactivity.</p>
+            <button class="copy-button" data-target="entry-content-w4">Copy Entry</button>
             <h3>Journal Questions:</h3>
             <ol>
                 <li><strong>Which Storage, Browser, and Third-Party APIs did you choose, and why?</strong><br>
@@ -96,7 +125,7 @@
             <h3>Lab 1 Reflection and Challenges:</h3>
             <ul>
                 <li><strong>Steps Followed & Technologies:</strong> Describe the steps using GitHub, VS Code, PythonAnywhere, Android Studio, PWA, and Kotlin code.<br>
-                    The lab began with GitHub setup, creating the Temperature ConverterPWA repository and integrating with VS Code by installing Git and the GitHub extensions. I used VS Code to open the repository remotely, create the initial index.html and commit the changes. Next, I deployed the site using GitHub Pages after changing the repository visibility to public. The PWA was built by adding the manifest.json for installability, the main UI (HTML form, converter.css for styling, and converter.js for conversion logic). Finally, a Service Worker (sw.js) was added to enable offline functionality. I also tested deploying the same files to PythonAnywhere and followed instructions to run a Kotlin-based Temperature Converter app in Android Studio.
+                    The lab began with GitHub setup, creating the Temperature ConverterPWA repository and integrating with VS Code by installing Git and the GitHub extensions. I used VS Code to open the repository remotely, create the initial index.html and commit the changes. Next, I deployed the site using GitHub Pages after changing the repository visibility to public. The PWA was built by adding the **manifest.json** for installability, the main UI (HTML form, converter.css for styling, and converter.js for conversion logic). Finally, a Service Worker (sw.js) was added to enable offline functionality. I also tested deploying the same files to PythonAnywhere and followed instructions to run a Kotlin-based Temperature Converter app in Android Studio.
                 </li>
                 <li><strong>Challenges Faced:</strong> Describe any difficulties you encountered while running the code or configuring the platforms.<br>
                     One challenge was ensuring the correct relative paths were used for the PWA manifest and Service Worker references (e.g., /manifest.json and /sw.js). Incorrect paths prevented the app from being installed or working offline. Another area of complexity was setting up Android Studio and running the Kotlin app, as it required downloading and configuring SDKs and emulators, which was significantly more complex than the web deployments (GitHub Pages and PythonAnywhere).
