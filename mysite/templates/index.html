@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Journal PWA - Home</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
         <h1>Welcome to My Learning Journey</h1>
         <h2>Ramesh Chaudhary</h2>
         <p>This Progressive Web App (PWA) serves as my evolving learning log, portfolio, and personal profile for the "FGCT6021 Mobile Application Development" unit. It will showcase the skills and technologies learned each week.</p>
-        
+
         <section class="welcome-message">
             <h3>My Goal for This PWA</h3>
             <p>To document my weekly learning, showcase my projects, and present my professional profile within a responsive, installable website.</p>
@@ -26,9 +26,9 @@
     <footer>
         <p>&copy; 2025 Ramesh Chaudhary. All rights reserved.</p>
     </footer>
-    
-    <script src="js/storage.js"></script> 
-    <script src="js/browser.js"></script>
-    <script src="js/script.js"></script>
+
+    <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
