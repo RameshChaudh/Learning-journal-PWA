@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Journal PWA - Projects</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
@@ -14,35 +14,42 @@
     <main class="projects-page">
         <h1>My Technical Work Portfolio</h1>
         <p>A showcase of work completed during the Mobile Application Development unit.</p>
-        
+
         <section class="project-list">
-            
+
+            <article class="project-item">
+                <h3>Lab 6: Flask Backend Integration</h3>
+                <p>Deployed the PWA using Flask on PythonAnywhere, setting up the API routes (GET, POST, DELETE) to manage journal entries stored in a persistent JSON file.</p>
+                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
+            </article>
+
             <article class="project-item">
                 <h3>Lab 5: Python & JSON Backend Data</h3>
                 <p>Extended the PWA with Python backend integration for JSON file storage, implementing dual storage system and export functionality.</p>
                 <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://rameshchaudh.github.io/Learning-journal-PWA/" target="_blank">Live GitHub Pages Site</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
             </article>
 
             <article class="project-item">
                 <h3>Lab 4: Introduction to API</h3>
                 <p>Enhanced the PWA with three distinct APIs: Local Storage for persistent journal entry saving and deletion, Clipboard API for copying entry text, and Spotify Widget integration for external content.</p>
                 <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://rameshchaudh.github.io/Learning-journal-PWA/" target="_blank">Live GitHub Pages Site</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
             </article>
 
             <article class="project-item">
                 <h3>Lab 3: JavaScript & DOM Manipulation</h3>
                 <p>Implemented core interactivity including a reusable, dynamic navigation menu, and a client-side theme switcher (light/dark mode).</p>
                 <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://rameshchaudh.github.io/Learning-journal-PWA/" target="_blank">Live GitHub Pages Site</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
             </article>
 
             <article class="project-item">
                 <h3>Lab 2: Learning Journal PWA Structure</h3>
                 <p>Established the responsive, mobile-first design and static structure using pure HTML and CSS.</p>
                 <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://rameshchaudh.github.io/Learning-journal-PWA/" target="_blank">Live GitHub Pages Site</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
             </article>
 
             <article class="project-item">
@@ -59,8 +66,8 @@
         <p>&copy; 2025 Ramesh Chaudhary. All rights reserved.</p>
     </footer>
 
-    <script src="js/storage.js"></script>
-    <script src="js/browser.js"></script>
-    <script src="js/script.js"></script> 
+    <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
