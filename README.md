@@ -40,3 +40,26 @@ Open your terminal or command prompt and run the following command:
 ```bash
 git clone [https://github.com/Rameshchaudh/Learning-journal-PWA.git](https://github.com/Rameshchaudh/Learning-journal-PWA.git)
 cd Learning-journal-PWA
+
+# Create a virtual environment
+python3 -m venv venv
+# Activate the environment
+source venv/bin/activate  # On Windows, use: .\venv\Scripts\activate
+
+# Install Flask
+pip install Flask
+
+/Learning-journal-PWA
+|-- flask_app.py
+|-- /templates          <-- All HTML pages
+|-- /static             <-- Client-side assets
+|    |-- /css
+|    |-- /js
+|    |-- /images
+|    |-- /backend        <-- Where reflections.json is stored/read by Flask
+
+# Set the application file
+export FLASK_APP=flask_app.py
+# Run the server
+flask run
+
