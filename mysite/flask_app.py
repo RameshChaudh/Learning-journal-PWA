@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory, make_response
 import json, os
 from datetime import datetime
 
@@ -9,9 +9,8 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "static", "backend", "reflections.json")
 
-# --- Helper Functions for JSON Management (Omitted for brevity) ---
+# --- Helper Functions for JSON Management ---
 def load_reflections():
-    # ... (unchanged)
     if os.path.exists(DATA_FILE):
         try:
             with open(DATA_FILE, "r") as f:
@@ -22,37 +21,51 @@ def load_reflections():
     return []
 
 def save_reflections(reflections):
-    # ... (unchanged)
     os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     with open(DATA_FILE, "w") as f:
         json.dump(reflections, f, indent=4)
 
-# --- Flask Routes (The API and Pages) ---
+# ==========================================
+#  LAB 7 PWA ROUTES (NEW ADDITIONS)
+# ==========================================
 
-# Route 1: Serves the Home Page (index.html)
-# The function name 'index' is the target for url_for('index')
+# 1. Serve Manifest (Makes the app installable)
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')
+
+# 2. Serve Service Worker (Enables Offline Mode)
+@app.route('/sw.js')
+def service_worker():
+    # We serve the file from static/js/ but at the root URL /sw.js
+    response = make_response(send_from_directory('static/js', 'sw.js'))
+    # Critical Header: Allows the SW to control the whole app, not just /static/js/
+    response.headers['Service-Worker-Allowed'] = '/'
+    return response
+
+# ==========================================
+#  STANDARD PAGE ROUTES
+# ==========================================
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# NEW ROUTE: Serves the Journal Page (journal.html)
-# The function name 'journal' is the target for url_for('journal')
 @app.route("/journal")
 def journal():
     return render_template("journal.html")
 
-# NEW ROUTE: Serves the About Page (about.html)
-# The function name 'about' is the target for url_for('about')
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-# NEW ROUTE: Serves the Projects Page (projects.html)
-# The function name 'projects' is the target for url_for('projects')
 @app.route("/projects")
 def projects():
     return render_template("projects.html")
 
+# ==========================================
+#  API ROUTES
+# ==========================================
 
 @app.route("/api/reflections", methods=["GET"])
 def get_reflections():
@@ -61,25 +74,28 @@ def get_reflections():
 
 @app.route("/api/reflections", methods=["POST"])
 def add_reflection():
-    data = request.get_json()
-    new_id = int(datetime.now().timestamp() * 1000)
+    try:
+        data = request.get_json()
+        new_id = int(datetime.now().timestamp() * 1000)
 
-    new_reflection = {
-        "id": new_id,
-        "title": data.get("title", "New API Entry"),
-        "content": data["content"],
-        "date": datetime.now().strftime("%x"),
-        "time": datetime.now().strftime("%X"),
-        "source": "python"
-    }
+        # Mate's specific data structure
+        new_reflection = {
+            "id": new_id,
+            "title": data.get("title", "New API Entry"),
+            "content": data.get("content", ""), # Safe get to prevent crash if missing
+            "date": datetime.now().strftime("%x"),
+            "time": datetime.now().strftime("%X"),
+            "source": "python"
+        }
 
-    reflections = load_reflections()
-    reflections.append(new_reflection)
-    save_reflections(reflections)
+        reflections = load_reflections()
+        reflections.append(new_reflection)
+        save_reflections(reflections)
 
-    return jsonify(new_reflection), 201
+        return jsonify(new_reflection), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-# Route 4: DELETE API Route
 @app.route("/api/reflections/<int:entry_id>", methods=["DELETE"])
 def delete_reflection(entry_id):
     reflections = load_reflections()
@@ -91,3 +107,6 @@ def delete_reflection(entry_id):
         return jsonify({"message": f"Reflection ID {entry_id} deleted."}), 200
     else:
         return jsonify({"message": f"Reflection ID {entry_id} not found."}), 404
+
+if __name__ == "__main__":
+    app.run(debug=True)
