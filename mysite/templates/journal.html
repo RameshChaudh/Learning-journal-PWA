@@ -38,6 +38,27 @@
         <section id="saved-entries-container">
             </section>
 
+            <article class="journal-entry">
+            <h2>Week 7: Progressive Web Apps (Lab 7)</h2>
+            <p id="entry-content-w7">Goal: Transform the Learning Journal into a fully installable Progressive Web App (PWA) with offline capabilities using Service Workers and the Web Manifest.</p>
+            <button class="copy-button" data-target="entry-content-w7">Copy Entry</button>
+            <h3>Journal Questions:</h3>
+            <ol>
+                <li><strong>Why is it useful to enhance your Flask app with PWA features?</strong><br>
+                    Enhancing the Flask app with PWA features bridges the gap between a standard website and a native mobile application. It allows the journal to be installed directly on the home screen with a custom icon, removing the browser address bar for a more immersive feel. Crucially, it ensures the app remains functional even when the network is unstable or offline, preventing the user from seeing error pages.
+                </li>
+                <li><strong>What did you use to support offline access and dynamic data?</strong><br>
+                    I implemented a Service Worker (`sw.js`) to intercept network requests. To handle dynamic data like journal entries, I used a <strong>Network First</strong> strategy: the app attempts to fetch fresh data from the Flask API first, and if that fails (offline), it retrieves the saved copy from the Cache Storage. For static assets like images and CSS, I used a <strong>Cache First</strong> strategy to ensure they load instantly.
+                </li>
+                <li><strong>What extra feature did you add, and why?</strong><br>
+                    I implemented a <strong>Custom "Install App" Button</strong>. By listening for the browser's `beforeinstallprompt` event, I prevented the default behavior and instead displayed a prominent purple button in the UI. I added this because standard browser install options are often hidden inside menus; a visible button significantly improves the user experience by making the installation process obvious and accessible.
+                </li>
+                <li><strong>Did you face any challenges deploying your PWA, and how did you solve them?</strong><br>
+                    My biggest challenge was the Service Worker Scope. By default, a service worker in the `static/js/` folder cannot control the root HTML pages. I solved this by configuring a specific route in my Flask backend (`flask_app.py`) to serve the `sw.js` file from the root URL (`/sw.js`) and explicitly adding the `Service-Worker-Allowed: /` header. This allowed the service worker to cache the entire application correctly.
+                </li>
+            </ol>
+        </article>
+
         <article class="journal-entry">
             <h2>Week 6: Flask Backend & PWA Integration (Lab 6)</h2>
             <p id="entry-content-w6">Goal: Successfully integrate a Flask backend deployed on PythonAnywhere with the Learning Journal PWA, enabling server-side JSON data management via API requests.</p>
@@ -48,16 +69,16 @@
                     The frontend-backend connection is crucial because it allows the application to manage persistent, universal data. The frontend (HTML/CSS/JS) handles the user interface and presentation, while the backend (Flask/Python) manages business logic, security, and storing data in a central location, like a JSON file.
                 </li>
                 <li><strong>Which HTTP methods did you use in Flask, and why?</strong><br>
-                    I used **GET**, **POST**, and **DELETE** methods. GET is used by the frontend to fetch all existing journal entries from the server for display. POST is used to submit new journal entries from the form to the Flask server to be appended to the JSON file. DELETE (the extra feature) is used to send a request to the server to remove a specific entry by ID.
+                    I used GET, POST, and DELETE methods. GET is used by the frontend to fetch all existing journal entries from the server for display. POST is used to submit new journal entries from the form to the Flask server to be appended to the JSON file. DELETE (the extra feature) is used to send a request to the server to remove a specific entry by ID.
                 </li>
                 <li><strong>What is the difference between using Flask to store and load JSON data and reading JSON directly in the browser?</strong><br>
                     Reading JSON directly in the browser only works for static files (read-only) and is limited to client-side data. Using Flask to store and load JSON data means the data is handled by the server (backend). This allows for dynamic actions like saving new data (POST) or deleting old data (DELETE), ensuring the data is persistent across user sessions and devices, which is impossible with a direct file read.
                 </li>
                 <li><strong>Did you face any difficulties when running your project on PythonAnywhere? How did you handle them?</strong><br>
-                    The main difficulties were ensuring file paths were correctly configured for the `reflections.json` file (as it was nested in `/static/backend`), and fixing the navigation links. The path issue was fixed by updating the `DATA_FILE` variable in `flask_app.py`. The navigation issue was solved by removing the faulty JavaScript injection and implementing **server-side rendering** using Jinja2's `url_for` and `request.path` logic directly in the HTML templates.
+                    The main difficulties were ensuring file paths were correctly configured for the `reflections.json` file (as it was nested in `/static/backend`), and fixing the navigation links. The path issue was fixed by updating the `DATA_FILE` variable in `flask_app.py`. The navigation issue was solved by removing the faulty JavaScript injection and implementing server-side rendering using Jinja2's `url_for` and `request.path` logic directly in the HTML templates.
                 </li>
                 <li><strong>What extra feature did you build into your PWA with Flask, and why did you add it?</strong><br>
-                    I implemented a **DELETE route** that allows users to permanently delete server-stored entries from the `reflections.json` file. I added this to provide full CRUD (Create, Read, Update, Delete) functionality to the journal, giving the user complete control over their server-side data.
+                    I implemented a DELETE route that allows users to permanently delete server-stored entries from the `reflections.json` file. I added this to provide full CRUD (Create, Read, Update, Delete) functionality to the journal, giving the user complete control over their server-side data.
                 </li>
             </ol>
         </article>
@@ -163,7 +184,7 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
