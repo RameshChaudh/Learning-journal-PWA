@@ -1,77 +1,87 @@
-// Function to dynamically insert the reusable navigation menu
-function loadNavigation() {
-    // Check if navigation already exists (to prevent duplication)
-    if (document.querySelector('nav')) {
-        return;
-    }
+// static/js/script.js
 
-    // NOTE: Links use hardcoded paths (/, /about, /journal, /projects)
+let globalDeferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    globalDeferredPrompt = e;
+    console.log("📲 Global Install prompt captured");
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) installBtn.style.display = 'block';
+});
+
+// --- 2. CORE UI LOGIC ---
+
+function loadNavigation() {
+    if (document.querySelector('nav')) return;
     const navHTML = `
         <header>
             <nav aria-label="Main Navigation">
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/journal">Journal</a></li>
+                    <li><a href="/resources">Study Tracker</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/projects">Projects</a></li>
                 </ul>
             </nav>
         </header>
     `;
-
     const navPlaceholder = document.getElementById('nav-placeholder');
     const themeToggle = document.getElementById('theme-toggle');
-
     if (navPlaceholder) {
-        // Insert the navigation structure into the placeholder
         navPlaceholder.innerHTML = navHTML;
-
-        // Move the existing theme toggle button *after* the new header
-        if (themeToggle) {
-             navPlaceholder.parentNode.insertBefore(themeToggle, navPlaceholder.nextSibling);
-        }
-
-        // Highlight the active page
+        if (themeToggle) navPlaceholder.parentNode.insertBefore(themeToggle, navPlaceholder.nextSibling);
         highlightActivePage();
     }
 }
 
-// Function to handle the active class highlighting
 function highlightActivePage() {
-    let currentPath = window.location.pathname.replace(/\/$/, '');
-    if (currentPath === '' || currentPath.endsWith('index.html')) {
-        currentPath = '/';
-    }
-
+    let currentPath = window.location.pathname.replace(/\/$/, '') || '/';
     const navLinks = document.querySelectorAll('nav a');
-
     navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        if (linkHref === currentPath) {
-            link.classList.add('active');
-        }
+        if (link.getAttribute('href') === currentPath) link.classList.add('active');
     });
 }
 
-// Theme Switcher Functionality
 function setupThemeSwitcher() {
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.querySelector('body');
-
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-
-            if (body.classList.contains('dark-mode')) {
-                themeToggle.textContent = 'Switch to Light Mode';
-            } else {
-                themeToggle.textContent = 'Switch to Dark Mode';
-            }
+            themeToggle.textContent = body.classList.contains('dark-mode') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
         });
     }
 }
 
-// --- LAB 7: PWA FEATURES (Service Worker & Install Button) ---
+// --- 3. LIVE DASHBOARD STATS (Sync with reflections.json) ---
+
+async function updateHomeStats() {
+    const journalEl = document.getElementById('total-entries');
+    const sessionsEl = document.getElementById('total-sessions');
+
+    try {
+        // Fetch directly from the backend JSON file via API
+        const response = await fetch('/api/reflections');
+        if (response.ok) {
+            const serverEntries = await response.json();
+            if (journalEl) journalEl.textContent = serverEntries.length;
+            // Update local cache for offline viewing
+            localStorage.setItem('reflections', JSON.stringify(serverEntries));
+        }
+    } catch (error) {
+        console.log("Offline: Falling back to local cache");
+        const localEntries = JSON.parse(localStorage.getItem('reflections')) || [];
+        if (journalEl) journalEl.textContent = localEntries.length;
+    }
+
+    // Study sessions currently remain local-only
+    const sessions = JSON.parse(localStorage.getItem('studySessions')) || [];
+    if (sessionsEl) sessionsEl.textContent = sessions.length;
+}
+
+// --- 4. PWA CORE FEATURES ---
 
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -84,75 +94,32 @@ function registerServiceWorker() {
 }
 
 function setupInstallButton() {
-    let deferredPrompt;
-
-    // 1. Create the button dynamically (Purple Theme)
+    if (document.getElementById('install-btn')) return;
     const installBtn = document.createElement('button');
     installBtn.id = 'install-btn';
     installBtn.textContent = '📲 Install App';
-
-    // Apply Purple Styling (#8e44ad)
     installBtn.style.cssText = `
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #8e44ad;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 50px;
-        font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        z-index: 10000;
-        cursor: pointer;
-        transition: transform 0.2s;
-        font-family: sans-serif;
+        display: none; position: fixed; bottom: 20px; right: 20px;
+        background: #8e44ad; color: white; border: none; padding: 12px 24px;
+        border-radius: 50px; font-weight: bold; z-index: 999999; cursor: pointer;
     `;
-
-    // Add hover effect
-    installBtn.onmouseover = function() { this.style.transform = 'scale(1.05)'; };
-    installBtn.onmouseout = function() { this.style.transform = 'scale(1)'; };
-
     document.body.appendChild(installBtn);
+    if (globalDeferredPrompt) installBtn.style.display = 'block';
 
-    // 2. Listen for the 'beforeinstallprompt' event
-    window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent Chrome 67+ from automatically showing the prompt
-        e.preventDefault();
-        // Stash the event so it can be triggered later
-        deferredPrompt = e;
-        // Show the button
-        installBtn.style.display = 'block';
-        console.log("📲 Install prompt captured");
-    });
-
-    // 3. Handle click
-    installBtn.addEventListener('click', (e) => {
-        // Hide button
+    installBtn.addEventListener('click', () => {
         installBtn.style.display = 'none';
-        // Show prompt
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                } else {
-                    console.log('User dismissed the A2HS prompt');
-                }
-                deferredPrompt = null;
-            });
+        if (globalDeferredPrompt) {
+            globalDeferredPrompt.prompt();
+            globalDeferredPrompt.userChoice.then(() => globalDeferredPrompt = null);
         }
     });
 }
 
-// Initialize all functions when the DOM is fully loaded
+// --- 5. INITIALIZE ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Core Logic
     loadNavigation();
     setupThemeSwitcher();
-
-    // 2. Lab 7 PWA Logic
+    updateHomeStats();
     registerServiceWorker();
     setupInstallButton();
 });
