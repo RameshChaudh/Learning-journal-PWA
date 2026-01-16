@@ -225,9 +225,7 @@ footer {
 }
 
 
-/* ==================================== */
 /* 💻 MEDIA QUERY FOR TABLET/DESKTOP (> 768px) */
-/* ==================================== */
 
 @media screen and (min-width: 768px) {
 
@@ -268,3 +266,219 @@ footer {
         padding-top: 0;
     }
 }
+
+/*  Home Screen Enhancements */
+
+.home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: 800px;
+    text-align: center;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #8e44ad, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Glassmorphism Stats Bar */
+.quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 2.5rem;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    min-width: 150px;
+}
+
+.dark-mode .stat-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-pop { animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+.animate-fade { animation: fadeInUp 0.8s ease both; animation-delay: 0.2s; }
+.animate-slide-up { animation: fadeInUp 0.8s ease both; animation-delay: 0.4s; }
+.animate-fade-delayed { animation: fadeInUp 0.8s ease both; animation-delay: 0.6s; }
+
+/* Interactive Buttons */
+.btn-primary, .btn-outline {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary { background: var(--primary-color); color: white; border: none; }
+.btn-outline { background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); }
+
+.btn-primary:active, .btn-outline:active {
+    transform: scale(0.95);
+}
+
+/* Refined Link & Button Styling */
+
+/* 1. Global Link Cleanup */
+a {
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 2. Home Page Action Buttons (Write Journal / Start Tracking) */
+.action-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap; /* Wraps on very small screens */
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    padding: 12px 24px;
+    background-color: var(--primary-color, #00bcd4);
+    color: white !important; /* Forces text to be white, overriding blue defaults */
+    border-radius: 50px; /* Maximum rounding for pill shape */
+    font-weight: 700;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 2px solid transparent; /* Prevents layout shift on hover */
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
+}
+
+/* Secondary Button (Outline Style) */
+.action-btn.secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color, #00bcd4);
+    color: var(--primary-color, #00bcd4) !important;
+    box-shadow: none;
+}
+
+.action-btn.secondary:hover {
+    background-color: var(--primary-color, #00bcd4);
+    color: white !important;
+}
+
+/* --- BOX TYPE LINK STYLING (New Design) --- */
+
+.project-links-container {
+    display: flex;
+    gap: 15px; /* More space between boxes */
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+/* The Base "Box" Design */
+.pill-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    min-width: 140px; /* Ensures they look like uniform boxes */
+
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px; /* Boxy corners, NOT round */
+
+    color: #333 !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* GitHub Box Specifics */
+.pill-link.github {
+    border-left: 6px solid #24292e; /* Thick dark accent on left */
+}
+
+/* Live Site Box Specifics */
+.pill-link.live {
+    border-left: 6px solid #00bcd4; /* Thick cyan accent on left */
+}
+
+/* --- HOVER EFFECTS (The "Pop") --- */
+.pill-link:hover {
+    transform: translateY(-3px); /* Moves up slightly */
+    background-color: #fff;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    border-color: #ccc;
+}
+
+.pill-link:active {
+    transform: translateY(0); /* Pushes down when clicked */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- DARK MODE ADJUSTMENTS --- */
+body.dark-mode .pill-link {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .pill-link:hover {
+    background-color: #383838;
+    border-color: #666;
+    color: #fff !important;
+}
+
+body.dark-mode .pill-link.github {
+    border-left-color: #fff;
+}
+
+body.dark-mode .pill-link.live {
+    border-left-color: #00bcd4;
+}
+
+   
