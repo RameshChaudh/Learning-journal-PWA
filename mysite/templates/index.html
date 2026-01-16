@@ -3,29 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Journal PWA - Home</title>
+    <title>Learning Journal - Home</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="home-page">
+    <div id="nav-placeholder"></div>
+    <button id="theme-toggle">Switch to Dark Mode</button>
 
- <div id="nav-placeholder"></div>
- <button id="theme-toggle">Switch to Dark Mode</button>
+    <main>
+        <section class="home-hero">
+            <div class="hero-container">
+                <div class="header-group">
+                    <h1 class="animate-pop">Master Your <span class="gradient-text">Learning Journey</span></h1>
+                    <p class="animate-fade">Documenting the path from student to professional developer, one session at a time.</p>
+                </div>
 
+                <div class="quick-stats animate-slide-up">
+                    <div class="stat-card">
+                        <span id="total-entries" class="stat-number">0</span>
+                        <label>Journal Entries</label>
+                    </div>
+                    <div class="stat-card">
+                        <span id="total-sessions" class="stat-number">0</span>
+                        <label>Study Sessions</label>
+                    </div>
+                </div>
 
-    <main class="home-page">
-        <h1>Welcome to My Learning Journey</h1>
-        <h2>Ramesh Chaudhary</h2>
-        <p>This Progressive Web App (PWA) serves as my evolving learning log, portfolio, and personal profile for the "FGCT6021 Mobile Application Development" unit. It will showcase the skills and technologies learned each week.</p>
+                <div class="hero-actions animate-fade-delayed">
+                    <a href="/journal" class="btn-primary">📝 Write Journal</a>
+                    <a href="/resources" class="btn-outline">⏱️ Start Tracking</a>
+                </div>
+            </div>
+        </section>
 
-        <section class="welcome-message">
-            <h3>My Goal for This PWA</h3>
-            <p>To document my weekly learning, showcase my projects, and present my professional profile within a responsive, installable website.</p>
+        <section class="intro-section animate-fade">
+            <h2>Welcome to My Learning Log</h2>
+            <p>This Progressive Web App (PWA) serves as a digital archive of my technical growth. Here, I document daily challenges, project milestones, and reflections on new technologies I encounter during my studies.</p>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <h3>📖 Daily Reflections</h3>
+                <p>Consistent logging of coding sessions and theoretical concepts to reinforce long-term memory.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🚀 Project Tracking</h3>
+                <p>Monitoring progress on key assignments and personal development projects.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 Mobile First</h3>
+                <p>Designed to be fully responsive and installable on mobile devices for quick access on the go.</p>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Ramesh Chaudhary. All rights reserved.</p>
+        <p>© 2025 Ramesh Chaudhary. All rights reserved.</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
