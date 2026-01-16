@@ -3,74 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Journal PWA - Projects</title>
+    <title>Projects - Learning Journal</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="projects-page">
 
     <div id="nav-placeholder"></div>
     <button id="theme-toggle">Switch to Dark Mode</button>
 
-    <main class="projects-page">
-        <h1>My Technical Work Portfolio</h1>
-        <p>A showcase of work completed during the Mobile Application Development unit.</p>
-
-        <section class="project-list">
-            <article class="project-item">
-                <h3>Lab 7: Progressive Web Apps (PWA)</h3>
-                <p>Transformed the Learning Journal into a fully installable PWA. Implemented a Service Worker with a <strong>Network First</strong> caching strategy for offline access to dynamic data. Added a custom <strong>"Install App" button</strong> feature to improve the installation experience.</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 6: Flask Backend Integration</h3>
-                <p>Deployed the PWA using Flask on PythonAnywhere, setting up the API routes (GET, POST, DELETE) to manage journal entries stored in a persistent JSON file.</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 5: Python & JSON Backend Data</h3>
-                <p>Extended the PWA with Python backend integration for JSON file storage, implementing dual storage system and export functionality.</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 4: Introduction to API</h3>
-                <p>Enhanced the PWA with three distinct APIs: Local Storage for persistent journal entry saving and deletion, Clipboard API for copying entry text, and Spotify Widget integration for external content.</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 3: JavaScript & DOM Manipulation</h3>
-                <p>Implemented core interactivity including a reusable, dynamic navigation menu, and a client-side theme switcher (light/dark mode).</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 2: Learning Journal PWA Structure</h3>
-                <p>Established the responsive, mobile-first design and static structure using pure HTML and CSS.</p>
-                <a href="https://github.com/Rameshchaudh/Learning-journal-PWA" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://ramesh32.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
-
-            <article class="project-item">
-                <h3>Lab 1: Temperature Converter PWA</h3>
-                <p>Demonstrated multi-platform deployment using GitHub, PythonAnywhere, and PWA fundamentals.</p>
-                <a href="https://github.com/Rameshchaudh/TemperatureConverterPWA-" target="_blank">GitHub Repository (Code)</a>
-                <a href="https://rameshchaudh.github.io/TemperatureConverterPWA-/" target="_blank">Live GitHub Pages Site</a>
-                <a href="https://rameshchaudh.pythonanywhere.com/" target="_blank">Live PythonAnywhere Site</a>
-            </article>
+    <main class="container">
+        <section class="intro-section animate-fade">
+            <h1>My Technical Work Portfolio</h1>
+            <p>A showcase of work completed during the Mobile Application Development unit.</p>
         </section>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Mini Project: Study Tracker & Productivity Hub</h3>
+            <p>Developed a persistent focus tool featuring a <strong>Pomodoro Timer</strong> and <strong>Session Logger</strong>. Key technical achievements include implementing <strong>State Persistence</strong> via LocalStorage to prevent data loss during navigation and a custom <strong>Progress Bar</strong> for real-time visual feedback. The tool is fully integrated into the PWA shell for offline utility.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/resources" target="_blank" class="pill-link live">Live Feature Site</a>
+            </div>
+        </article>
+
+        <hr class="divider">
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 7: Progressive Web Apps (PWA)</h3>
+            <p>Transformed the Learning Journal into a fully installable PWA. Implemented a Service Worker with a <strong>Network First</strong> caching strategy for offline access to dynamic data. Added a custom <strong>"Install App" button</strong> feature to improve the installation experience.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 6: Flask Backend Integration</h3>
+            <p>Deployed the PWA using Flask on PythonAnywhere, setting up the API routes (GET, POST, DELETE) to manage journal entries stored in a persistent JSON file.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/journal" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 5: Python & JSON Backend Data</h3>
+            <p>Extended the PWA with Python backend integration for JSON file storage, implementing a dual storage system and export functionality.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/journal" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 4: Introduction to API</h3>
+            <p>Enhanced the PWA with three distinct APIs: Local Storage for persistent journal entry saving and deletion, Clipboard API for copying entry text, and Spotify Widget integration for external content.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/resources" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 3: JavaScript & DOM Manipulation</h3>
+            <p>Implemented core interactivity including a reusable, dynamic navigation menu, and a client-side theme switcher (light/dark mode).</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 2: Learning Journal PWA Structure</h3>
+            <p>Established the responsive, mobile-first design and static structure using pure HTML and CSS.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/Learning-journal-PWA" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://ramesh32.pythonanywhere.com/" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
+        <article class="project-entry animate-slide-up">
+            <h3>Lab 1: Temperature Converter PWA</h3>
+            <p>Demonstrated multi-platform deployment using GitHub, PythonAnywhere, and PWA fundamentals.</p>
+            <div class="project-links-container">
+                <a href="https://github.com/RameshChaudh/TemperatureConverterPWA-" target="_blank" class="pill-link github">Code Repository</a>
+                <a href="https://rameshchaudh.pythonanywhere.com/" target="_blank" class="pill-link live">Live PythonAnywhere Site</a>
+            </div>
+        </article>
+
     </main>
 
     <footer>
-        <p>&copy; 2025 Ramesh Chaudhary. All rights reserved.</p>
+        <p>© 2025 Ramesh Chaudhary. All rights reserved.</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
