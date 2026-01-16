@@ -36,7 +36,41 @@
 </section>
 
         <section id="saved-entries-container">
-            </section>
+            </section> 
+       <article class="journal-entry mini-project">
+    <h2> Mini Project: Study Tracker & Productivity Hub</h2>
+    <p><strong>Goal:</strong> Implement a personal productivity tool to complement the learning journal, focusing on persistence and native-like mobile features.</p>
+
+    <h3>1. What additional features did you add to your Learning Journal?</h3>
+    <p>
+        As part of my mini-project, I significantly expanded the PWA by adding a <strong>Persistent Study Tracker</strong>. This feature is centered around a Pomodoro-style timer that allows users to engage in 25-minute focus sessions directly within the application interface. Unlike a standard static timer that might reside on a webpage, I implemented a <strong>Dynamic Visual Progress Bar</strong>. This bar utilizes CSS transitions to provide real-time visual feedback, making the passage of time tangible and helping the user maintain focus as they work through their study tasks.
+        <br><br>
+        Furthermore, I built a <strong>Session Logging System</strong>. Every time a session is completed, the app automatically captures the date and timestamp, saving it to a historical list displayed on the resources page. I also integrated a <strong>Third-Party Spotify Widget</strong> directly into the tracker interface, allowing users to select study-appropriate music without leaving the application. To ensure the app feels like a professional dashboard, I added a <strong>Live Stats Counter</strong> to the home screen. This counter pulls data directly from the server-side JSON file and LocalStorage to show the total number of journal entries and completed study sessions, transforming the journal into a comprehensive academic utility.
+    </p>
+
+    <h3>2. Why did you choose your mini project idea?</h3>
+    <p>
+        I chose the Study Tracker because it fulfills a practical need that aligns with the core purpose of a "Learning Journal." While the journal tracks the outcomes of learning, the tracker facilitates the actual process of learning itself. I wanted to explore the technical challenge of <strong>Active State Management</strong>. Standard web applications often lose their state during navigation, which is a major point of friction for mobile users. By choosing a timer, I forced myself to solve the problem of keeping an application "alive" in the background even when the user is interacting with other pages, such as the Journal or About sections.
+        <br><br>
+        Furthermore, this project idea allowed me to demonstrate proficiency in <strong>DOM Manipulation</strong> and <strong>Client-Side Storage</strong>, which are critical pillars of modern mobile development. I wanted to create a tool that felt like a "native" application. Most students rely on separate apps for focus and note-taking; by integrating them into a single PWA, I am showcasing the power of web technologies to replace traditional native apps. This idea also allowed me to practice UI/UX principles, specifically designing a touch-friendly interface with high-contrast displays and responsive layouts suitable for use on mobile devices during intense study sessions.
+    </p>
+
+    <h3>3. What technical challenges did you face and how did you solve them?</h3>
+    <p>
+        The most significant technical hurdle was <strong>Timer Persistence</strong>. In my early prototypes, the timer variable only lived in the browser's volatile memory (RAM). If a user navigated away to write a journal entry and then returned, the timer would reset to its default 25:00. This made the tool useless for multitasking. I solved this by moving to a <strong>"timestamp-based persistence"</strong> model. I implemented logic where clicking "Start" calculates a future end-time (current time + 25 minutes) and saves that specific timestamp to <code>localStorage</code>. Now, every time the page loads, a script compares the current time to the saved timestamp and resumes the countdown precisely.
+    </p>
+
+    <p>
+        Another major challenge involved the <strong>Install Button Visibility</strong> on the resources page. Because the page was content-heavy with the Spotify iframe, the browser would sometimes miss the <code>beforeinstallprompt</code> event. I solved this by refactoring my <code>script.js</code> to include a <strong>Global Event Listener</strong> placed outside of any functional blocks. This ensured the event was "captured" as soon as the JavaScript file loaded, regardless of the page's rendering speed. This was critical for ensuring the PWA remained installable across all routes.
+    </p>
+
+    <h3>4. What would you improve if given more time?</h3>
+    <p>
+        If granted more development time, I would prioritize <strong>Server-Side Data Synchronization</strong> for the study sessions through the Flask backend. Currently, the study logs are stored only in <code>localStorage</code>, meaning they are locked to a single device. By creating a new API route in <code>flask_app.py</code>, I could allow users to sync their focus progress across their phone and laptop, providing a unified learning history. This would involve complex data merging logic similar to what I implemented for the journal entries.
+        <br><br>
+        Additionally, I would implement <strong>Advanced PWA Features</strong> such as the <strong>Web Push API</strong>. While my current timer uses a simple browser alert, a Push Notification would allow the app to alert the user even if the browser is closed or the screen is locked, which is essential for a truly effective productivity timer. I would also like to add a <strong>Data Visualization Dashboard</strong> using a library like Chart.js. This would take the JSON data from the study logs and visualize it into weekly bar charts, helping users identify their most productive days and hours. These improvements would elevate the PWA from a functional tool to a professional-grade productivity suite.
+    </p>
+       </article>
 
             <article class="journal-entry">
             <h2>Week 7: Progressive Web Apps (Lab 7)</h2>
