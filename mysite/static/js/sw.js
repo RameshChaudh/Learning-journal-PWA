@@ -1,12 +1,13 @@
 // static/js/sw.js
-// Service Worker for Lab 7
+// Incremented to v10 to force clean update for Dashboard & CSS
+const CACHE_NAME = 'mate-cache-v11';
 
-const CACHE_NAME = 'mate-cache-v2'; // Changed to v2 to force update
 const STATIC_ASSETS = [
   '/',
   '/journal',
   '/projects',
   '/about',
+  '/resources',
   '/static/css/style.css',
   '/static/js/script.js',
   '/static/js/storage.js',
@@ -17,7 +18,6 @@ const STATIC_ASSETS = [
   '/manifest.json'
 ];
 
-// 1. INSTALL
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -27,7 +27,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// 2. ACTIVATE
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keyList) => {
@@ -42,32 +41,25 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// 3. FETCH
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Network First (API & HTML)
+  // NETWORK FIRST: Use for HTML and API calls to reflections.json
   if (event.request.headers.get('accept').includes('text/html') || url.pathname.startsWith('/api/')) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
           return response;
         })
-        .catch(() => {
-          return caches.match(event.request);
-        })
+        .catch(() => caches.match(event.request))
     );
   }
-  // Cache First (Static Assets)
+  // CACHE FIRST: Use for static assets like CSS and JS
   else {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request);
-      })
+      caches.match(event.request).then((response) => response || fetch(event.request))
     );
   }
 });
