@@ -110,40 +110,36 @@ http://127.0.0.1:5000/
 - **Cache‑First** strategy for static assets  
 - Handles **versioning** and **cache cleanup** to ensure updates apply correctly  
 
-```
 
 ### 📄 **Manifest**
 - `theme_color: "#8e44ad"`  
 - `display: "standalone"`  
 - Includes app icons for **Add to Home Screen** installation  
 
-```
 
 ### 📥 **Custom Install Trigger**
 - Listens for the `beforeinstallprompt` event  
 - Displays a custom **“Install App”** button for a better user experience  
 
----
 
 ## 📝 **Mini Project: Persistent Study Tracker**
 
 The Study Tracker solves the issue of timers resetting when the page reloads.
 
-```
 
 ### ⚙️ **How It Works**
 - Stores a **target timestamp** instead of a countdown  
 - Recalculates remaining time on page reload  
 - Continues running even after browser restart  
 
-```
+
 
 ### 🌟 **Benefits**
 - **Reliable**  
 - **Persistent**  
 - **Great for productivity tracking**  
 
-```
+
 
 ## © **2026 Ramesh Chaudhary**  
 **BSc Computer Science — University for the Creative Arts**
